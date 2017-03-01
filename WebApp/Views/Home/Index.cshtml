@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebApp.Models.FilmModel>
+@{
+    ViewBag.Title = "Кинопрокат";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home"))
+    {
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Выберите фильм
+                        </th>
+                        <th>
+                            Колличество дней
+                        </th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>@Html.DropDownList("MyFilms")</td>
+                    <td>@Html.TextBox("Days")</td>
+                    <td><input type="submit" value="Calculte" /></td>
+                    <td>@ViewBag.OrderPrice</td>
+                </tr>
+            </table>
+        </div>
+    }
+    <div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>
+                        Название
+                    </th>
+                    <th>
+                        Цена
+                    </th>
+                    <th>
+                        Информация о фильме
+                    </th>
+                </tr>
+            </thead>
+
+            @foreach (var film in Model)
+            {
+                <tr>
+                    <td width="20%">
+                        <div>
+                            <img src=@Url.Content(film.Img_path) width="40%" alt="Я тебя вижу">
+                        </div>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelFilm => film.Name)
+                    </td>
+                    <td>
+                        <div>@Html.DisplayFor(modelFilm => film.Price)</div>                 
+                    </td>
+                    <td>
+                        <div>@Html.DisplayFor(modelFilm => film.Info)</div>
+                    </td>                    
+                </tr>
+            }
+            </div>
+    </table>
+</body>
+</html>
